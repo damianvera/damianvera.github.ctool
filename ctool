@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ctool</title>
+  <meta name="description" content="A tool to count things.">
+  <meta name="author" content="Elias Santander">
+  <meta name="theme-color" content="#000">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image" content="icons/icon-512.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="manifest" href="ctool.webmanifest">
+  <link rel="icon" href="img/icon-32.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="img/icon-192.png" sizes="192x192">
+  <link rel="icon" href="img/icon-32.png" sizes="32x32">
+  <link href="css/bootstrap.css" rel="stylesheet" />
+  <link href="css/main.css" rel="stylesheet" />
+  <script src="js/console.js"></script>
+</head>
+<!-- 
+<script>
+   //onload="modal2.toggle()"
+</script>
+-->
+
+<body onload="hideConsole()">
+  <!-- app -->
+  <page id="wraper" class="no-print ">
+    <div id="foo" class="d-flex justify-content-center">
+      <div id="d-note" class="row margentop card">
+        <h3 class="d-flex justify-content-left">Delivery Note</h3>
+
+        <div class="selectorb2">
+          <div class="border-gray border-bottom border-top padding-lado">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
+              <label class="form-check-label" for="flexRadioDefault1">
+                B2C
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+              <label class="form-check-label" for="flexRadioDefault2">
+                B2B
+              </label>
+            </div>
+          </div>
+        </div>
+        <div id="noteToCopy" class="container-fluid d-flex justify-content-center">
+          <table class="table table-striped table-hover table-sm">
+            <thead>
+              <tr>
+                <th onclick="sortTable(0)" style="">Cantidad</th>
+                <th colspan="3" onclick="sortTable(1)">Item</th>
+              </tr>
+            </thead>
+            <tcontent>
+              <tbody id="dnote">
+              </tbody>
+              <dfooter style="margin-left: 2px; font-weight: bold;">
+                <tr id="dfooter" style="margin-left: 2px; font-weight: bold;">
+                </tr>
+              </dfooter>
+            </tcontent>
+          </table>
+
+        </div>
+        <p></p>
+      </div>
+
+    </div>
+    </div>
+    <div id="selector" class="bg-dark border-dark">
+      <div class="row d-flex justify-content-center ">
+        <div class="col d-flex justify-content-center">
+          <input id="cantidad" type="number" class="form-control col-9" placeholder="Cantidad" aria-label="cantidad"
+            required  data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="↓" data-bs-placement="top" />
+        </div>
+        <div class="col">
+          <select list="pansel" name="pansele" id="pansele" type="text" class="form-control col-9" placeholder="variedad"
+            aria-label="pansele"  data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="↓" data-bs-placement="top" />
+          <datalist id="pansel">
+            <option value="Variedad" style="display:none" selected>Variedad</option>
+            <option value="semillas500">Semillas 500</option>
+            <option value="rustico500">Rustico 500</option>
+            <option value="clasico500">Clasico 500</option>
+            <option value="mediterraneo500">Mediterráneo 500</option>
+            <option value="maiz500">Maíz 500</option>
+            <option value="muesli500">Muesli 500</option>
+            <option value="bagel">Bagel</option>
+            <option value="multimolde">Multicereal Molde 500</option>
+            <option value="multibun">Multicereal Bun</option>
+            <option value="bunpapamarket">Bun Papa Market</option>
+            <option value="pizza">Pizza Blanca</option>
+            <option value="ciabatta">Ciabatta</option>
+            <option value="bunpapa12u">Bun Papa 12u</option>
+            <option value="semillasMolde1kg">Semillas Molde 1Kg</option>
+            <option value="rusticoMolde1kg">Rustico Molde 1Kg</option>
+            <option value="clasicoMolde1kg">Clásico Molde 1Kg</option>
+            <option value="briocheMolde">Brioche</option>
+            <option value="trigo500">Trigo 500</option>
+            <option value="rugbrod800">Rugbrod 800</option>
+            <option value="papa125">Papa 125g</option>
+            <option value="clasico125">Clasico 125g</option>
+            <option value="rustico125">Rustico 125g</option>
+            <option value="semillas125">Semillas 125g</option>
+            <option value="mediterraneo125">Mediterraneo 125g</option>
+            <option value="multi125">Multicereal 125g</option>
+            <option value="bunpapaharina">Bun papa Harina</option>
+            <option value="muesliMolde1kg">Muesli Molde 1kg</option>
+            <option value="maizMolde1kg">Maiz Molde 1kg</option>
+            <option value="lactalMolde">Lactal Molde 500gr</option>
+            <option value="quesoBun">Queso Bun 100gr</option>
+            <option value="jalaTrenza">Jala trenza dulce</option>
+          <!--  <option value="pandulce">Pan de navidad</option> -->
+          </datalist>
+          </select>
+        </div>
+        <div class="col">
+          <div><button id="btnPlus" class="btn btn-info col-9" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="↓" data-bs-placement="top" >Agregar</button></div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center margentop">
+        <div class="col d-flex justify-content-center"><button id="btnSave" class="btn btn-success col-9" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="↓" data-bs-placement="top" >Guardar</button></div>
+        <div class="col d-flex justify-content-center"><button id="btnReset" class="btn btn-danger col-9" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="↓" data-bs-placement="top" >Reset</button></div>
+        <div class="col d-flex justify-content-center"><button class="btn btn-warning col-9" data-bs-toggle="modal" data-bs-target="#modalthree">Historial</button></div>
+        <div class="col d-flex justify-content-center"><button id="btnPreview" class="btn btn-primary  col-9" data-bs-toggle="modal" data-bs-target="#modalone">Total</button></div>
+      </div>
+    </div>
+    </div>
+
+  </page>
+  <!-- Modal -->
+  <div class="modal fade" id="modalone" tabindex="-1" aria-labelledby="modalLabelone" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content prTable">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabelone"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body prTable d-inline-flex">
+          <table id="prTable" class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>Cantidad total:</th>
+                <th>B2C</th>
+                <th>B2B</th>
+              </tr>
+            </thead>
+            <tbody id="totaldoc"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <!-- Modal2 -->
+  <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="text-center">
+          <h1>Ayuda</h1>
+          <h3>Atajos del teclado:</h3>
+          <p>'Ctrl + I' Imprimir</p>
+          <p>'Ctrl + A' Agregar item a la lista</p>
+          <p>'Ctrl + G' Guardar remito a la lista total</p>
+        </div>
+        <div id="esconder" class="modal-footer no-print">
+          <button type="button" class="ahre btn btn-danger no-print" data-bs-dismiss="modal"
+            onclick="lStorage.clear(); document.location.reload(true)">
+            Clear lStorage & Reload
+          </button>
+          <a href=""><button type="button" data-bs-dismiss="modal" class="btn btn-primary no-print">
+              Cerrar
+            </button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal2 -->
+  <!-- Modal3 -->
+  <div class="modal fade" id="modalthree" tabindex="-1" aria-labelledby="modalLabelthree" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabelone">History</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="historyback" class="modal-body">
+
+        </div>
+        <div id="esconder" class="modal-footer no-print">
+          <button type="button" class="ahre btn btn-secondary no-print" data-bs-dismiss="modal">
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal3 -->
+  <!-- notificaciones -->
+  <div id="liveToast" class="notification toast align-items-center text-white bg-primary border-0" role="alert"
+    aria-live="assertive" aria-atomic="true" style="z-index: 11">
+    <div class="d-flex">
+      <div id="toastMessage" class="toast-body">
+        this will be replaced.
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+        aria-label="Close"></button>
+    </div>
+  </div>
+
+
+  <!-- app -->
+  </main>
+  <script src="js/bootstrap.bundle.js" defer></script>
+  <script src="js/var.js" defer></script>
+  <script src="js/func.js" defer></script>
+  <script src="js/engine.js" defer></script>
+  <script src="js/events.js" defer></script>
+  <script src="js/lstorage.js" defer></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+    <script>
+		var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+		var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+			return new bootstrap.Popover(popoverTriggerEl)
+		})
+    </script>
+        <script>
+          function hideConsole() {
+              document.querySelector('.mobileConsole_base').style.display = "none";
+          }
+          </script>
+</body>
+
+</html>
